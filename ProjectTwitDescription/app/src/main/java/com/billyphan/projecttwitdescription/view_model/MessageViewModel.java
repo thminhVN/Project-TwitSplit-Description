@@ -12,6 +12,9 @@ import com.billyphan.projecttwitdescription.exceptions.TextNullException;
 import com.billyphan.projecttwitdescription.exceptions.WordTooLongNoWhiteSpaceException;
 import com.billyphan.projecttwitdescription.model.Message;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+
 /**
  * Created by Billy Phan on 4/6/2018.
  */
@@ -33,6 +36,12 @@ public class MessageViewModel extends ViewModel {
     @Override
     public void onCreate() {
         super.onCreate();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getLoading().set(false);
         getMessage().set(new Message(getActivity().getResources().getString(R.string.template_message)));
     }
 
@@ -43,6 +52,11 @@ public class MessageViewModel extends ViewModel {
         this.mSuccess.unSubscribe();
         this.mValidation.unSubscribe();
         this.mMessage.unSubscribe();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     public void sendToServer() {
@@ -81,13 +95,15 @@ public class MessageViewModel extends ViewModel {
         return mSuccess;
     }
 
-    public void updateMessage(String s) {
-        try {
-            getMessage().get().update(s);
-        } catch (WordTooLongNoWhiteSpaceException e) {
-            this.mValidation.set(e.getMessage());
-        } catch (TextNullException e) {
-            this.mValidation.set(e.getMessage());
-        }
+    public void updateMessage(String s, Runnable success) {
+        Executors.newFixedThreadPool(1).execute(() -> {
+            try {
+                getMessage().get().update(s);
+                getActivity().runOnUiThread(success);
+            } catch (Exception e) {
+                getActivity().runOnUiThread(() -> mValidation.set(e.getMessage()));
+            }
+        });
+
     }
 }

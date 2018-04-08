@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public class ApiService {
-    private static final long TIME_DELAY = 2000;
+    private static final long TIME_DELAY = 1000;
     private final Handler mHandler;
 
     public ApiService() {
@@ -23,6 +23,7 @@ public class ApiService {
             @Override
             public void run() {
                 resultCallback.onSuccess("");
+                resultCallback.onFinish();
             }
         }, TIME_DELAY);
     }

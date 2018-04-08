@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_header_size">19sp</dimen>
+    <dimen name="drop_down_size">32dp</dimen>
+    <dimen name="line_size" format="float">0.5dp</dimen>
+</resources>

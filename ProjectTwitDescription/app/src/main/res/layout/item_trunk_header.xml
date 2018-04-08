@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="10dp">
+
+    <TextView
+        android:id="@+id/txt_trunk_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:text="test"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/default_header_size" />
+
+    <ImageButton
+        android:id="@+id/img_drop_down"
+        android:layout_width="@dimen/drop_down_size"
+        android:layout_height="@dimen/default_header_size"
+        android:background="@android:color/transparent"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+        android:src="@drawable/drop_down" />
+</LinearLayout>

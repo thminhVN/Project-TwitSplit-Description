@@ -19,10 +19,8 @@ public class LiveData<T> {
     }
 
     public void set(T data) {
-        if (this.data != data) {
-            this.data = data;
-            notifyChange();
-        }
+        this.data = data;
+        notifyChange();
     }
 
     public void subscribe(@NonNull ObserveListener<T> listener) {
@@ -30,7 +28,7 @@ public class LiveData<T> {
         listeners.add(listener);
     }
 
-    public void unSubscribe(){
+    public void unSubscribe() {
         listeners.clear();
     }
 

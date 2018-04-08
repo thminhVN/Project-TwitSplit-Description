@@ -17,13 +17,6 @@ public class Message {
 
     public Message(String string) {
         this.mMessage = string;
-        try {
-            this.update(string);
-        } catch (WordTooLongNoWhiteSpaceException e) {
-            e.printStackTrace();
-        } catch (TextNullException e) {
-            e.printStackTrace();
-        }
     }
 
     public void update(String s) throws WordTooLongNoWhiteSpaceException, TextNullException {
